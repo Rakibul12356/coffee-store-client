@@ -5,10 +5,15 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        'ranco': ['Ranco', 'sans-serif'], // 'Ranco' is the name you gave in @font-face
+      }
+    },
   },
   plugins: [
    
+    // eslint-disable-next-line no-undef
     require('daisyui'),
   ],
 }
