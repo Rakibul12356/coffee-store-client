@@ -2,6 +2,7 @@ import React from 'react';
 import { FaEye } from "react-icons/fa";
 import { MdModeEditOutline } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
+import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2'
 const CoffeeCard = ({ coffee }) => {
     const { name, supplier, quantity, category, chef, photoUrl, _id } = coffee
@@ -58,7 +59,10 @@ const CoffeeCard = ({ coffee }) => {
                     <div className="card-actions ">
                         <div className="join join-vertical space-y-4">
                             <button className="btn bg-[#D2B48C]"><FaEye /></button>
+                            <Link to={`/updateCoffee/${_id}`}>
                             <button className="btn bg-[#3C393B] "><MdModeEditOutline /></button>
+                            </Link>
+                           
                             <button onClick={() => handleDelete(_id)} className="btn text-white bg-[#EA4744]"><MdDelete cl /></button>
                         </div>
                     </div>
