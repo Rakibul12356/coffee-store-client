@@ -7,7 +7,7 @@ const Home = () => {
   const coffees = useLoaderData()
   return (
     <div>
-      <h1 className='text-center text-4xl font-bold '>Total collection of coffee:{coffees.length}</h1>
+      <h1 className='text-center text-xl font-bold '>Total collection of coffee:{coffees.length}</h1>
       <div className= 'm-20 grid grid-cols-2 gap-6'>     
       {
         coffees.map(coffee => <CoffeeCard
