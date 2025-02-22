@@ -4,11 +4,10 @@ import { MdModeEditOutline } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2'
-const CoffeeCard = ({ coffee }) => {
+const CoffeeCard = ({ coffee, coffees, setCoffees }) => {
     const { name, supplier, quantity, category, chef, photoUrl, _id } = coffee
     const handleDelete = _id => {
         console.log(_id)
-
         //sweet
         Swal.fire({
             title: "Are you sure?",
@@ -20,25 +19,24 @@ const CoffeeCard = ({ coffee }) => {
             confirmButtonText: "Yes, delete it!"
         }).then((result) => {
             if (result.isConfirmed) {
-
-                fetch(`http://localhost:5000/coffee/${_id}`,{
-                    method:'DELETE'
+                fetch(`http://localhost:5000/coffee/${_id}`, {
+                    method: 'DELETE'
                 })
                     .then(res => res.json())
                     .then(data => {
                         console.log(data)
                         if (data.deletedCount > 0) {
-                             Swal.fire({
-                            title: "Deleted!",
-                            text: "Your file has been deleted.",
-                            icon: "success"
+                            Swal.fire({
+                                title: "Deleted!",
+                                text: "Your file has been deleted.",
+                                icon: "success"
                             })
+                            const remaining = coffees.filter(cof => cof._id !== _id)
+                            setCoffees(remaining)
                         }
                     })
-
             }
         });
-
     }
     return (
         <div>
@@ -60,9 +58,8 @@ const CoffeeCard = ({ coffee }) => {
                         <div className="join join-vertical space-y-4">
                             <button className="btn bg-[#D2B48C]"><FaEye /></button>
                             <Link to={`/updateCoffee/${_id}`}>
-                            <button className="btn bg-[#3C393B] "><MdModeEditOutline /></button>
+                                <button className="btn bg-[#3C393B] "><MdModeEditOutline /></button>
                             </Link>
-                           
                             <button onClick={() => handleDelete(_id)} className="btn text-white bg-[#EA4744]"><MdDelete cl /></button>
                         </div>
                     </div>
